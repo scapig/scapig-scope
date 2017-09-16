@@ -71,4 +71,17 @@ class ScopeControllerSpec extends UnitSpec with MockitoSugar {
       jsonBodyOf(result) shouldBe Json.parse(s"""{"code": "NOT_FOUND", "message": "no scope found for key ${scope.key}"}""")
     }
   }
+
+  "fetchMultiple" should {
+
+    "succeed with a 200 (Ok) with the scopes" in new Setup {
+
+      given(mockScopeService.fetchMultiple(Set(scope.key))).willReturn(successful(Set(scope)))
+
+      val result: Result = await(underTest.fetchMultiple(scope.key)(request))
+
+      status(result) shouldBe Status.OK
+      jsonBodyOf(result) shouldBe Json.toJson(Set(scope))
+    }
+  }
 }

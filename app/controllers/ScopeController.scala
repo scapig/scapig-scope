@@ -9,6 +9,7 @@ import services.ScopeService
 import models.JsonFormatters._
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 @Singleton
 class ScopeController  @Inject()(cc: ControllerComponents,
@@ -26,4 +27,11 @@ class ScopeController  @Inject()(cc: ControllerComponents,
       case None => ScopeNotFound(key).toHttpResponse
     }
   }
+
+  def fetchMultiple(keys: String) = Action.async { implicit request =>
+    scopeService.fetchMultiple(keys.split("\\s+").toSet) map { scopes =>
+      Ok(Json.toJson(scopes))
+    }
+  }
+
 }

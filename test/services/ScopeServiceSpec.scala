@@ -13,6 +13,7 @@ import scala.concurrent.Future.{failed, successful}
 class ScopeServiceSpec extends UnitSpec with MockitoSugar {
 
   val scope = Scope("scopeKey", "scopeName", "scopeDescription")
+  val scope2 = Scope("scope2", "scopeName", "scopeDescription")
 
   trait Setup {
     val mockScopeRepository = mock[ScopeRepository]
@@ -48,7 +49,7 @@ class ScopeServiceSpec extends UnitSpec with MockitoSugar {
       result shouldBe Some(scope)
     }
 
-    "return None when the API does not exist" in new Setup {
+    "return None when the scope does not exist" in new Setup {
       given(mockScopeRepository.fetch(scope.key)).willReturn(successful(None))
 
       val result = await(underTest.fetch(scope.key))
@@ -60,6 +61,41 @@ class ScopeServiceSpec extends UnitSpec with MockitoSugar {
       given(mockScopeRepository.fetch(scope.key)).willReturn(failed(new RuntimeException("Error message")))
 
       intercept[RuntimeException]{await(underTest.fetch(scope.key))}
+    }
+
+  }
+
+  "fetchMultiple" should {
+    "return the scopes" in new Setup {
+      given(mockScopeRepository.fetch(scope.key)).willReturn(successful(Some(scope)))
+      given(mockScopeRepository.fetch(scope2.key)).willReturn(successful(Some(scope2)))
+
+      val result = await(underTest.fetchMultiple(Set(scope.key, scope2.key)))
+
+      result shouldBe Set(scope, scope2)
+    }
+
+    "return an empty set when there is no scope matching" in new Setup {
+      given(mockScopeRepository.fetch(scope.key)).willReturn(successful(None))
+
+      val result = await(underTest.fetchMultiple(Set(scope.key)))
+
+      result shouldBe Set.empty
+    }
+
+    "ignore the scopes which do not exist" in new Setup {
+      given(mockScopeRepository.fetch(scope.key)).willReturn(successful(None))
+      given(mockScopeRepository.fetch(scope2.key)).willReturn(successful(Some(scope2)))
+
+      val result = await(underTest.fetchMultiple(Set(scope.key, scope2.key)))
+
+      result shouldBe Set(scope2)
+    }
+
+    "fail when the repository fails" in new Setup {
+      given(mockScopeRepository.fetch(scope.key)).willReturn(failed(new RuntimeException("Error message")))
+
+      intercept[RuntimeException]{await(underTest.fetchMultiple(Set(scope.key)))}
     }
 
   }
