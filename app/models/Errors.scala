@@ -16,4 +16,6 @@ sealed abstract class ErrorResponse(
 case class ErrorInvalidRequest(errorMessage: String) extends ErrorResponse(BAD_REQUEST, "INVALID_REQUEST", errorMessage)
 case class ScopeNotFound(key: String) extends ErrorResponse(NOT_FOUND, "NOT_FOUND", s"no scope found for key $key")
 
+case class ErrorInternalServerError(errorMessage: String) extends ErrorResponse(INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", errorMessage)
+
 class ValidationException(message: String) extends RuntimeException(message)
