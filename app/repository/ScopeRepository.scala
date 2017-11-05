@@ -17,7 +17,7 @@ import scala.concurrent.Future
 @Singleton
 class ScopeRepository @Inject()(val reactiveMongoApi: ReactiveMongoApi)  {
 
-  val repository: Future[JSONCollection] =
+  def repository: Future[JSONCollection] =
     reactiveMongoApi.database.map(_.collection[JSONCollection]("tapi-api-scope"))
 
   def save(scope: Scope): Future[Scope] = {
