@@ -16,7 +16,7 @@ import scala.concurrent.Future.successful
 
 class ScopeControllerSpec extends UnitSpec with MockitoSugar {
 
-  val scope = Scope("scopeKey", "scopeName", "scopeDescription")
+  val scope = Scope("scopeKey", "scopeName")
 
   trait Setup {
     val mockScopeService: ScopeService = mock[ScopeService]
@@ -44,7 +44,7 @@ class ScopeControllerSpec extends UnitSpec with MockitoSugar {
       val result: Result = await(underTest.createOrUpdate()(request.withBody(Json.parse(body))))
 
       status(result) shouldBe Status.BAD_REQUEST
-      jsonBodyOf(result) shouldBe Json.parse("""{"code":"INVALID_REQUEST","message":"description is required"}""")
+      jsonBodyOf(result) shouldBe Json.parse("""{"code":"INVALID_REQUEST","message":"name is required"}""")
       verifyZeroInteractions(mockScopeService)
     }
 

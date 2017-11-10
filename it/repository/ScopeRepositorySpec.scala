@@ -12,7 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class ScopeRepositorySpec extends UnitSpec with BeforeAndAfterEach {
 
-  val scope = Scope("scopeKey", "scopeName", "scopeDescription")
+  val scope = Scope("scopeKey", "scopeName")
 
   lazy val fakeApplication: Application = new GuiceApplicationBuilder()
     .configure("mongodb.uri" -> "mongodb://localhost:27017/tapi-api-scope-test")

@@ -10,8 +10,8 @@ import scalaj.http.Http
 
 class ScopeSpec extends BaseFeatureSpec {
 
-  val scope = Scope("scopeKey", "scopeName", "scopeDescription")
-  val scope2 = Scope("scope2", "scopeName", "scopeDescription")
+  val scope = Scope("scopeKey", "scopeName")
+  val scope2 = Scope("scope2", "scopeName")
 
   feature("create and fetch scope") {
 

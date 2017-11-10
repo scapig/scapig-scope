@@ -12,8 +12,8 @@ import scala.concurrent.Future.{failed, successful}
 
 class ScopeServiceSpec extends UnitSpec with MockitoSugar {
 
-  val scope = Scope("scopeKey", "scopeName", "scopeDescription")
-  val scope2 = Scope("scope2", "scopeName", "scopeDescription")
+  val scope = Scope("scopeKey", "scopeName")
+  val scope2 = Scope("scope2", "scopeName")
 
   trait Setup {
     val mockScopeRepository = mock[ScopeRepository]
