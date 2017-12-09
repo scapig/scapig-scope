@@ -1,4 +1,4 @@
-## tapi-api-scope
+## scapig-api-scope
 
 ## Building
 ``
@@ -8,10 +8,10 @@ sbt clean test it:test component:test
 ## Packaging
 ``
 sbt universal:package-zip-tarball
-docker build -t tapi-api-scope .
+docker build -t scapig-api-scope .
 ``
 
 ## Running
 ``
-docker run -p7010:7010 -i -a stdin -a stdout -a stderr tapi-api-scope sh start-docker.sh
+docker run -p7010:7010 -i -a stdin -a stdout -a stderr scapig-api-scope sh start-docker.sh
 ``

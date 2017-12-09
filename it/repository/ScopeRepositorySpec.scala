@@ -15,7 +15,7 @@ class ScopeRepositorySpec extends UnitSpec with BeforeAndAfterEach {
   val scope = Scope("scopeKey", "scopeName")
 
   lazy val fakeApplication: Application = new GuiceApplicationBuilder()
-    .configure("mongodb.uri" -> "mongodb://localhost:27017/tapi-api-scope-test")
+    .configure("mongodb.uri" -> "mongodb://localhost:27017/scapig-api-scope-test")
     .build()
 
   lazy val underTest = fakeApplication.injector.instanceOf[ScopeRepository]

@@ -1,4 +1,4 @@
-package tapi
+package scapig
 
 import models.Scope
 import play.api.http.Status.{NO_CONTENT, OK}
