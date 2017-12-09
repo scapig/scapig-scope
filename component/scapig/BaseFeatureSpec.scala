@@ -31,7 +31,7 @@ with GivenWhenThen with BeforeAndAfterEach with BeforeAndAfterAll with GuiceOneS
   val mocks = Seq[MockHost]()
 
   implicit override lazy val app: Application =  new GuiceApplicationBuilder().configure(
-    "mongodb.uri" -> "mongodb://localhost:27017/scapig-api-scope-it"
+    "mongodb.uri" -> "mongodb://localhost:27017/scapig-scope-it"
   ).build()
 
   private def mongoRepository = {

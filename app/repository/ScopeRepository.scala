@@ -18,14 +18,14 @@ import scala.concurrent.Future
 class ScopeRepository @Inject()(val reactiveMongoApi: ReactiveMongoApi)  {
 
   def repository: Future[JSONCollection] =
-    reactiveMongoApi.database.map(_.collection[JSONCollection]("scapig-api-scope"))
+    reactiveMongoApi.database.map(_.collection[JSONCollection]("scapig-scope"))
 
   def save(scope: Scope): Future[Scope] = {
     repository.flatMap(collection =>
       collection.update(
         Json.obj("key"-> scope.key), scope, upsert = true) map {
         case result: UpdateWriteResult if result.ok => scope
-        case error => throw new RuntimeException(s"Failed to save scapig-api-scope ${error.errmsg}")
+        case error => throw new RuntimeException(s"Failed to save scapig-scope ${error.errmsg}")
       }
     )
   }

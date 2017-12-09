@@ -3,7 +3,7 @@ import _root_.play.sbt.PlayImport._
 import sbt.Keys._
 import sbt._
 
-name := "scapig-api-scope"
+name := "scapig-scope"
 
 version := "1.0"
 
