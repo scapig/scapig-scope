@@ -30,12 +30,12 @@ with GivenWhenThen with BeforeAndAfterEach with BeforeAndAfterAll with GuiceOneS
   val timeout = Duration(5, TimeUnit.SECONDS)
   val mocks = Seq[MockHost]()
 
-  implicit override lazy val app: Application =  new GuiceApplicationBuilder().configure(
+  override def fakeApplication(): Application =  new GuiceApplicationBuilder().configure(
     "mongodb.uri" -> "mongodb://localhost:27017/scapig-scope-it"
   ).build()
 
   private def mongoRepository = {
-    fakeApplication.injector.instanceOf[ScopeRepository].repository
+    app.injector.instanceOf[ScopeRepository].repository
   }
 
   override protected def beforeEach(): Unit = {
