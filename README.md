@@ -11,7 +11,14 @@ sbt universal:package-zip-tarball
 docker build -t scapig-scope .
 ``
 
+## Publishing
+``
+docker tag scapig-scope scapig/scapig-scope:VERSION
+docker login
+docker push scapig/scapig-scope:VERSION
+``
+
 ## Running
 ``
-docker run -p7010:7010 -i -a stdin -a stdout -a stderr scapig-scope sh start-docker.sh
+docker run -p9011:9011 -d scapig/scapig-scope:VERSION
 ``
