@@ -13,12 +13,12 @@ docker build -t scapig-scope .
 
 ## Publishing
 ``
-docker tag scapig-scope scapig/scapig-scope:VERSION
+docker tag scapig-scope scapig/scapig-scope
 docker login
-docker push scapig/scapig-scope:VERSION
+docker push scapig/scapig-scope
 ``
 
 ## Running
 ``
-docker run -p9011:9011 -d scapig/scapig-scope:VERSION
+docker run -p9011:9011 -d scapig/scapig-scope
 ``
