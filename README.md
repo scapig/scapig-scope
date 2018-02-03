@@ -1,5 +1,8 @@
 ## scapig-scope
 
+This is the microservice which stores and retrieves the scope defined for the authorization as part of the Oauth 2.0 specs.
+It is part of the Scapig API Manager (http://scapig.com)
+
 ## Building
 ``
 sbt clean test it:test component:test
